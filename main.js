@@ -1,5 +1,5 @@
 'use strict';
-
+var round = 1;
 var prompt = require('prompt')
 var Player = require('./player.js')
 const firstPlayer =  'O'
@@ -40,9 +40,14 @@ class TicTacToe {
                 this.printBoard()
                 console.log(` ${this.currentPlayer} | ${this.players[this.currentPlayer].name} Win`)
                 return
-            } else {
-              this.switchPlayer();
+            } else if (this.checkDraw()) {
+                this.printBoard()
+                console.log("Draw")
+                return
+            }else {
+                this.switchPlayer();
             }
+            round++;
             this.start()
         });
         
@@ -52,12 +57,19 @@ class TicTacToe {
         this.board[location] = this.currentPlayer
     }
 
+
     switchPlayer() {
         if (this.currentPlayer === 'X') {
             this.currentPlayer = 'O'
         } else {
             this.currentPlayer = 'X'
         }
+    }
+    checkDraw(){
+        if (round === 9 ){
+            return true;
+        }
+        return false;
     }
 
     checkWin() {
