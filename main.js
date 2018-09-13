@@ -35,6 +35,7 @@ class TicTacToe {
         
         prompt.get(['location'], (err, result) => { // arrow function callback function
             // console.log(result.location);
+            if (this.checkLoca(result.location)){
             this.setBoard(result.location);
             if (this.checkWin()) {
                 this.printBoard()
@@ -49,7 +50,19 @@ class TicTacToe {
             }
             round++;
             this.start()
-        });
+            }else{
+                this.start()
+            }
+        
+    });
+        
+    }
+    checkLoca(location){
+        if (this.board[location]!= 'X' && this.board[location]!= 'O'){
+            return true;
+        }else{
+            return false;
+        }
         
     }
 
